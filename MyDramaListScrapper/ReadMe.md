@@ -1,4 +1,4 @@
-## About the project
+## About this project
 This project is used to scrap information of all the dramas in [MyDramaList](https://mydramalist.com/) website . 
 
 The dataset generated is a csv that consists of all completed (Drama + Drama Special) from MyDramaList and covers drama across multiple countries like South Korea, China, Japan, Thailand, Taiwan, etc. It gives a comprehensive report of all general details like date of airing, genre, tags, plot summary, cast, etc. and stats like no of reviewers, no of viewers, rating, rank, popularity along with the total number of positive and negative sentences used in the reviews, top 10 positive and negative review words as well location and gender info of the reviewers.
