@@ -153,7 +153,7 @@ if __name__ == "__main__":
 
         # Iterating through each drama url page
         cnt = 1
-        for drama, url in list(link_mapping.items())[:1]:
+        for drama, url in list(link_mapping.items()):
 
             drama_tic = dt.datetime.now()
 
