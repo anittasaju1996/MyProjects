@@ -37,11 +37,11 @@ This module takes care of extracting and processing general details scrapped fro
 
 ### Command to execute
 cd Scripts
-python my_drama_list_scrapper.py
+<br>python my_drama_list_scrapper.py
 
 ***Note1** :
-Output file is generate in the Scripts directory and is named as **Top_500_popular_drama_details_from_mydramalist.csv***
+<br>Output file is generate in the Scripts directory and is named as **Top_500_popular_drama_details_from_mydramalist.csv***
 
 ***Note2:**
-This script runs for top 500 dramas, in case you want to run the script for all the dramas in MyDramaList website, remove the code at line 106.
+<br>This script runs for top 500 dramas, in case you want to run the script for all the dramas in MyDramaList website, remove the code at line 106.
 max_page = 25 #Change back*
