@@ -67,7 +67,7 @@ def write_to_file(x):
     """
     #Creating dataframe with these info
     df = pd.DataFrame(x)
-    file_path = r"C:\Users\Anitta\Desktop\Jobs\Portfolio\MDL\Top_500_popular_drama_details_from_mydramalist.csv"
+    file_path = r"Top_500_popular_drama_details_from_mydramalist.csv"
     df.to_csv(file_path, encoding='utf-8')
     print(f"Data has been written in file : {file_path}")
 
