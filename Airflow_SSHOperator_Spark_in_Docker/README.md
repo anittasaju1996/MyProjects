@@ -342,7 +342,7 @@ Successful data insert into MySQL table
 
 ### Conclusion
 
-I hope you found this prject helpful. 
+I hope you found this pr0ject helpful. 
 
 
 [spark-standalone-doc]: https://spark.apache.org/docs/latest/submitting-applications.html#:~:text=Currently%2C%20the%20standalone%20mode%20does%20not%20support%20cluster%20mode%20for%20Python%20applications.
