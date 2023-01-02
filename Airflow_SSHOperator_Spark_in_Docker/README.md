@@ -43,7 +43,7 @@ You can see your created network with the following command.
 ~~~ docker
 docker network ls
 ~~~
-![Docker Network](/project_images/docker_network.jpg)
+![Docker Network](./project_images/docker_network.jpg)
 
 ### 2. Starting Airflow and Spark in Docker containers
 
@@ -78,7 +78,7 @@ Therefore, these variables will not be set in any ssh session to the worker node
 
 What we are trying to acheive :  
 
-![Technical diagram](/project_images/technical_diagram.png)
+![Technical diagram](./project_images/technical_diagram.png)
 
 
 After cloning this project, run the following command in the **parent directory** (i.e where the docker-compose file is present).
@@ -104,7 +104,7 @@ After cloning this project, run the following command in the **parent directory*
     sudo chmod g+s Airflow_SSHOperator_Spark_in_Docker
     ~~~
 
-    ![Change Group](/project_images/change_group.jpg)
+    ![Change Group](./project_images/change_group.jpg)
 
 3.  Create a virtual env for airflow 
 
@@ -119,7 +119,7 @@ After cloning this project, run the following command in the **parent directory*
     pip install "apache-airflow==2.3.4" --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-2.3.4/constraints-3.8.txt"
     ~~~
 
-    ![Creating Airflow venv](/project_images/creating_venv.png)
+    ![Creating Airflow venv](./project_images/creating_venv.png)
 
 4.  Start the containers
 
@@ -129,7 +129,7 @@ After cloning this project, run the following command in the **parent directory*
     
     For example, as I need 3 Spark workers, I have specified 4040-4042:4040 port mapping for spark-worker service in the docker-compose file. **Note that the order in which the ports are assigned is not in the order of the replication number. i.e spark-worker_1 might not be assigned to 4040.**
     
-    ![Spark Worker port ranges](/project_images/spark_worker_port_ranges.png)
+    ![Spark Worker port ranges](./project_images/spark_worker_port_ranges.png)
     
     First, start the airflow-init service to start Postgres DB and initialize airflow variables.  After that, start all the containers and as we want more than one spark worker,  use the scale option below.
     
@@ -138,9 +138,9 @@ After cloning this project, run the following command in the **parent directory*
     docker-compose up --scale spark-worker=3 -d
     ~~~
     
-    ![Starting Airflow Init](/project_images/starting_airflow_init.png)
+    ![Starting Airflow Init](./project_images/starting_airflow_init.png)
     
-    ![Starting Containers](/project_images/starting_containers.png)
+    ![Starting Containers](./project_images/starting_containers.png)
 
     Check if all the containers are running.
     
@@ -148,7 +148,7 @@ After cloning this project, run the following command in the **parent directory*
     docker-compose ps
     ~~~
     
-    ![Checking Containers](/project_images/checking_containers.png)
+    ![Checking Containers](./project_images/checking_containers.png)
     
     Here you can see that spark-worker_1 is binded to port **4042**.
     Check if all containers belong to same network using the following command
@@ -170,7 +170,7 @@ After cloning this project, run the following command in the **parent directory*
     #execute for other workers if you going to use them as clients
     ~~~
 
-    ![Copying ssh key](/project_images/copying_public_key.png)
+    ![Copying ssh key](./project_images/copying_public_key.png)
 
     Check spark worker to see if this airflow node is added as an authorized host
 
@@ -180,7 +180,7 @@ After cloning this project, run the following command in the **parent directory*
     grep "airflow" authorized_keys
     ~~~
 
-    ![Checking airflow public key in spark worker](/project_images/authorized_keys_on_spark_worker.png)    
+    ![Checking airflow public key in spark worker](./project_images/authorized_keys_on_spark_worker.png)    
 
 6.  Change spark-default.conf if needed
     
@@ -188,7 +188,7 @@ After cloning this project, run the following command in the **parent directory*
 
     I have already added some spark properties for the histroy server and logs. You can change them as per your needs
 
-    ![spark-default.conf history properties](/project_images/spark_default_conf.png) 
+    ![spark-default.conf history properties](./project_images/spark_default_conf.png) 
 
 All your applications are up and running now, here is a summary of them:
 
@@ -226,11 +226,11 @@ Follow the below steps to set up ssh connection from Airflow to Spark worker1.
 
 [SSH connection API documentation][airflow-ssh-conn-docs]
 
-![Airflow Admin](/project_images/airflow-admin.jpg) 
+![Airflow Admin](./project_images/airflow-admin.jpg) 
 
-![Airflow add connection](/project_images/airflow_add_conn.jpg) 
+![Airflow add connection](./project_images/airflow_add_conn.jpg) 
 
-![SSH connection in Airflow UI](/project_images/ssh_conn_airflow_ui.jpg) 
+![SSH connection in Airflow UI](./project_images/ssh_conn_airflow_ui.jpg) 
 
 
 ### 4. Installing python SSH providers package
@@ -244,7 +244,7 @@ docker exec -it -u airflow airflow_sshoperator_spark_in_docker_airflow-scheduler
 pip list | grep ssh
 ~~~
 
-![Checking SSH provider package version in scheduler node](/project_images/ssh_providers_docker_version.jpg) 
+![Checking SSH provider package version in scheduler node](./project_images/ssh_providers_docker_version.jpg) 
 
 If the apache-airflow-providers-ssh package is already installed, get the version (in my case 3.1.0) and install the same in your local virtual environment.
 
@@ -254,7 +254,7 @@ python3 -m pip install apache-airflow-providers-ssh==3.1.0
 deactivate
 ~~~
 
-![Checking SSH provider package version in scheduler node](/project_images/ssh_provider_package_local.png) 
+![Checking SSH provider package version in scheduler node](./project_images/ssh_provider_package_local.png) 
 
 
 In case the apache-airflow-providers-ssh package is not present in the Airflow scheduler node, then add the following in airflow_requirement.txt and then restart all the containers again. You should be able to see the package in the scheduler node now.
@@ -279,7 +279,7 @@ As Airflow runs inside Docker container, it needs my local host's IP address to 
 
 Here, host.docker.internal is a hostname that comes to our rescue. This is a special DNS name that gets resolved into our local host's IP address. You can read more about it [here][host-docker-internal]. So in the host tab in the connections UI, we have to use host.docker.internal (I have added this host in all containers though docker-compose, needed only for ubuntu)
 
-![MySql Connection in Airflow UI](/project_images/mysql_airflow_connection.jpg) 
+![MySql Connection in Airflow UI](./project_images/mysql_airflow_connection.jpg) 
 
 As Spark submission happens inside the worker node and searches the worker's folders, any files or objects used in the PySpark application should also be present in the worker node and they should be referenced using the worker's folder structure.
 
@@ -287,7 +287,7 @@ Somethings I want to highlight:
 
 1.  As mentioned earlier, when we start an ssh session on a Spark worker node, this session doesn't have all the environment variables set. So, we need to source the docker_env.txt (created during container creation time) to set all the environment variables in the ssh session before running the spark-submit command in the airflow dag.
 
-    ![SSH session environment sourcing](/project_images/ssh_session_env_sourcing.png) 
+    ![SSH session environment sourcing](./project_images/ssh_session_env_sourcing.png) 
     
 2.  spark-submit command :
     *   As we are trying to connect to the MySQL server from PySpark, we need the MySQL JDBC driver jar. I have kept this jar in the local jars folder which is bound to spark worker nodes /opt/bitnami/spark/dev/jars path as explained before. So while doing spark-submit, I am sending the worker's jar path to the PySpark application.
@@ -295,7 +295,7 @@ Somethings I want to highlight:
     *   Spark master is reachable at spark://spark:7077 for spark worker nodes. In the docker-compose, the Spark master has spark as the service name
     *   In the docker-compose file, we can see the memory and core settings for worker nodes, change them as per your requirement and then make corresponding changes to the executor and driver memory/core settings in the spark-submit or spark-default.conf.
 
-    ![Spark service configuration docker-compose](/project_images/spark_service_docker-compose.png) 
+    ![Spark service configuration docker-compose](./project_images/spark_service_docker-compose.png) 
 
 
 3.  In PySpark script:
@@ -312,32 +312,32 @@ Somethings I want to highlight:
 ### 6. Submitting Application
 
 After following the above steps, you should be able to see the sample dag in Airflow UI.
-![Airflow Dag](/project_images/airflow_dag.png) 
+![Airflow Dag](./project_images/airflow_dag.png) 
 
 Start the dag by unpausing it. As catchup is set to false, if the dag goes live after the start time, one run should be triggered 
 
 Successful run image
-![Successful Airflow Dag](/project_images/airflow_successful_dag.png) 
+![Successful Airflow Dag](./project_images/airflow_successful_dag.png) 
 
 Task1 logs will print the user running as airflow. From the below screenshot, you can see *** which is airflow. airflow is replaced with asterisks because it is also a password. 
-![Task1 Logs](/project_images/task1_logs.png) 
+![Task1 Logs](./project_images/task1_logs.png) 
 
 From the below screenshot, you can see that ssh authentication was successful using the public key, and the Spark application was successfully submitted.
-![Task2 Successful ssh logs](/project_images/successful_ssh_log.png) 
+![Task2 Successful ssh logs](./project_images/successful_ssh_log.png) 
 
 Spark Master Web UI application competition status
-![Spark Master Web UI](/project_images/spark_master_web_ui.png) 
+![Spark Master Web UI](./project_images/spark_master_web_ui.png) 
 
 Spark Application Web UI
-![Spark Application Web UI](/project_images/spark_application_web_ui.png) 
+![Spark Application Web UI](./project_images/spark_application_web_ui.png) 
 
 The completion logs from the history server
-![History server logs 1](/project_images/history_server_1.png) 
+![History server logs 1](./project_images/history_server_1.png) 
 
-![History server logs 2](/project_images/history_server_2.png) 
+![History server logs 2](./project_images/history_server_2.png) 
 
 Successful data insert into MySQL table
-![Task2 Successful ssh logs](/project_images/inserted_data_into_mysql.png) 
+![Task2 Successful ssh logs](./project_images/inserted_data_into_mysql.png) 
 
 
 ### Conclusion
