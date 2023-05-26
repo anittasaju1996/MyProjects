@@ -1,0 +1,17 @@
+version: '3'
+services:
+  scrapper:
+    build: .
+    image: my_drama_list_scrapper:1.0
+    environment:
+      - NLTK_DATA=/home/nltk_data
+    volumes:
+      - ./Output_files:/home/Output_files
+      - ./MyDramaListScrapper:/home/MyDramaListScrapper
+      - ./log_files:/home/log_files
+    command:
+      - /bin/bash
+      - -c
+      - |
+        cd /home/MyDramaListScrapper/Scripts
+        python3 my_drama_list_scrapper.py > /home/log_files/log.txt
